@@ -1,0 +1,25 @@
+import React from "react";
+
+interface IInputLoginProps {
+  type?: string;
+  label: string;
+  value: string;
+
+  onChange: (newValue: string) => void;
+  onPressEnter?: () => void;
+}
+
+export const InputLogin /* React.FC<IInputLoginProps> */ = React.forwardRef<HTMLInputElement, IInputLoginProps>((props, ref) => {
+  return (
+    <label htmlFor="">
+          <span>{props.label}</span>
+          <input 
+          ref={ref}
+          type={props.type} 
+          value={props.value} 
+          onChange={e => props.onChange(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' ? props.onPressEnter && props.onPressEnter() : undefined}
+          />
+    </label>
+  );
+});
